@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,12 +19,14 @@
             font-family: Arial, sans-serif;
             overflow: hidden;
         }
+
         #particles-js {
             position: absolute;
             width: 100%;
             height: 100%;
             z-index: 1;
         }
+
         .center-text {
             font-size: 5em;
             font-weight: bold;
@@ -32,6 +35,7 @@
             z-index: 1;
             color: #FCDC2A;
         }
+
         .small-text {
             font-size: 1em;
             margin-top: 10px;
@@ -39,24 +43,61 @@
             z-index: 1;
             color: #FCDC2A;
         }
+
         .button {
-            border-radius : 10px;
+            border-radius: 10px;
             margin-top: 20px;
             padding: 15px 30px;
             font-size: 1.3em;
             font-weight: bold;
             color: black;
             background-color: #FCDC2A;
-            border: none;
+            border: black;
             cursor: pointer;
             text-shadow: 1px 1px black;
             z-index: 1;
         }
+
         .button:hover {
-            box-shadow : 0px 0px 10px #FCDC2A;
-        } 
+            box-shadow: 0px 0px 10px #FCDC2A;
+        }
+
+        /* Developers menu styles */
+        .developers-menu {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+
+        .developers-menu h1 {
+            font-size: 2em;
+            color: black;
+            margin-bottom: 20px;
+        }
+
+        .developers-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .developers-menu ul li {
+            font-size: 1.2em;
+            color: black;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
+
 <body>
     <div id="particles-js"></div>
     <div class="center-text">
@@ -65,9 +106,25 @@
     <div class="small-text">
         Website made by NetCat & s1th
     </div>
-    <button class="button" onclick=window.location.href="https://discord.gg/Sw8VtwjWtM">
+
+    <button class="button" onclick="toggleDevelopersMenu()">
+        developers
+    </button>
+    <button class="button" onclick="window.location.href='https://discord.gg/Sw8VtwjWtM'">
         discord
     </button>
+
+    <div class="developers-menu" id="developersMenu" style="display: none;">
+        <h1>Developers</h1>
+        <ul>
+            <li>NetCat: Website domain register, Hoster, and maker</li>
+            <li>Hawa: Website helper</li>
+            <li>S1th: menu maker, owner, and helper</li>
+            <li>Catlicker: Menu dev</li>
+        </ul>
+        <button class="button" onclick="goBack()">Back</button>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         particlesJS("particles-js", {
@@ -180,6 +237,21 @@
             },
             "retina_detect": true
         });
+
+        function toggleDevelopersMenu() {
+            var developersMenu = document.getElementById("developersMenu");
+            if (developersMenu.style.display === "none") {
+                developersMenu.style.display = "block";
+            } else {
+                developersMenu.style.display = "none";
+            }
+        }
+
+        function goBack() {
+            var developersMenu = document.getElementById("developersMenu");
+            developersMenu.style.display = "none";
+        }
     </script>
 </body>
+
 </html>
