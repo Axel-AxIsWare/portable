@@ -14,7 +14,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: black;
+            background-color: RGB(25, 25, 25);
             color: red;
             font-family: Arial, sans-serif;
             overflow: hidden;
@@ -33,7 +33,7 @@
             text-align: center;
             text-shadow: 2px 2px black;
             z-index: 1;
-            color: #FCDC2A;
+            color: RGB(255, 255, 255);
         }
 
         .small-text {
@@ -41,7 +41,7 @@
             margin-top: 10px;
             text-align: center;
             z-index: 1;
-            color: #FCDC2A;
+            color: RGB(255, 255, 255);
         }
 
         .button {
@@ -50,8 +50,8 @@
             padding: 15px 30px;
             font-size: 1.3em;
             font-weight: bold;
-            color: black;
-            background-color: #FCDC2A;
+            color: white;
+            background-color: RGB(35, 35, 35);
             border: black;
             cursor: pointer;
             text-shadow: 1px 1px black;
@@ -59,71 +59,149 @@
         }
 
         .button:hover {
-            box-shadow: 0px 0px 10px #FCDC2A;
+            box-shadow: 0px 0px 10px RGB(35, 35, 35);
         }
 
-        /* Developers menu styles */
-        .developers-menu {
+        .panel-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .dev-credit-button {
+            border-radius: 10px;
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: white;
+            background-color: RGB(35, 35, 35);
+            border: black;
+            cursor: pointer;
+            text-shadow: 1px 1px black;
+            z-index: 1;
+        }
+
+
+        .panel {
+            display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: rgba(255, 255, 0, 0.7);
+            width: 70%;
+            background-color: #454545;
+            color: white;
             padding: 20px;
             border-radius: 10px;
-            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
             z-index: 2;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            display: none;
+            transition: opacity 0.5s ease;
         }
 
-        .developers-menu h1 {
-            font-size: 2em;
-            color: black;
-            margin-bottom: 20px;
+        .panel h2 {
+            font-size: 1.5em;
+            margin-top: 0;
         }
 
-        .developers-menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .panel p {
+            font-size: 20px;
         }
 
-        .developers-menu ul li {
-            font-size: 1.2em;
-            color: black;
-            margin-bottom: 10px;
+        .mute-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 9999;
         }
+
+        .mute-button:hover {
+            background-color: #555;
+        }
+
     </style>
 </head>
 
 <body>
+    <!-- Audio Element for Playing MP3 -->
+    <audio id="bgMusic" autoplay loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
     <div id="particles-js"></div>
     <div class="center-text">
-        portable.fun
+        portable.vin
     </div>
     <div class="small-text">
         Website made by NetCat & s1th
     </div>
 
-    <button class="button" onclick="toggleDevelopersMenu()">
-        developers
-    </button>
+    <button class="dev-credit-button" onclick="openPanel('dev-panel')">developers</button>
     <button class="button" onclick="window.location.href='https://discord.gg/Sw8VtwjWtM'">
         discord
     </button>
 
-    <div class="developers-menu" id="developersMenu" style="display: none;">
-        <h1>Developers</h1>
-        <ul>
-            <li>NetCat: Website domain register, Hoster, and maker</li>
-            <li>Hawa: Website helper</li>
-            <li>S1th: menu maker, owner, and helper</li>
-            <li>Catlicker: Menu dev</li>
-        </ul>
-        <button class="button" onclick="goBack()">Back</button>
+    <button class="mute-button" onclick="toggleMute()">Mute</button>
+
+    <div id="dev-panel-overlay" class="panel-overlay" onclick="closePanel('dev-panel')"></div>
+    <div id="dev-panel" class="panel">
+        <h2>Developers</h2>
+        <div>
+            <li>🗡️s1th: Founder, Main stuff, Website, Helper, Admin</li>
+            <li>
+                🔫Federal: Founder, Loader, Main stuff</li>
+            <li>❤️Hawa: Website, Helper, Admin</li>
+            <li>🐈NetCat: Website domain register, Hoster, and maker</li>
+            <li>💋Catlicker: Menu Co Owner</li>
+        </div>
     </div>
+
+    <script>
+        function openPanel(panelId) {
+            var panel = document.getElementById(panelId);
+            var overlay = document.getElementById(panelId + "-overlay");
+            panel.style.opacity = "0";
+            overlay.style.opacity = "0";
+            panel.style.display = "block";
+            overlay.style.display = "block";
+            setTimeout(function () {
+                panel.style.opacity = "1";
+                overlay.style.opacity = "1";
+            }, 50);
+        }
+
+        function closePanel(panelId) {
+            var panel = document.getElementById(panelId);
+            var overlay = document.getElementById(panelId + "-overlay");
+            panel.style.opacity = "0";
+            overlay.style.opacity = "0";
+            setTimeout(function () {
+                panel.style.display = "none";
+                overlay.style.display = "none";
+            }, 500);
+        }
+
+        function openDiscord() {
+            window.open("https://discord.gg/GSVRSCJvEV", "_blank");
+        }
+
+        function toggleMute() {
+            var bgMusic = document.getElementById('bgMusic');
+            bgMusic.muted = !bgMusic.muted;
+        }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
@@ -137,7 +215,7 @@
                     }
                 },
                 "color": {
-                    "value": "#FFEC9E"
+                    "value": "#92C7CF"
                 },
                 "shape": {
                     "type": "circle",
@@ -177,7 +255,7 @@
                 "line_linked": {
                     "enable": true,
                     "distance": 150,
-                    "color": "#FFFBDA",
+                    "color": "#EEF7FF",
                     "opacity": 0.4,
                     "width": 1
                 },
